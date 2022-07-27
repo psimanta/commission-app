@@ -12,6 +12,7 @@
   },
   "rules": {
     "linebreak-style": "off",
-    "indent": "off"
+    "indent": "off",
+    "max-len": "off"
   }
 }
