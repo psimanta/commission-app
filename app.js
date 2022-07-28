@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 const fs = require('fs');
 const { promisify } = require('util');
 const { createTransaction } = require('./transaction');
