@@ -23,16 +23,13 @@ class Transaction {
             case 'cash_out':
                 const limit = commissionData[this.type][this.userType].week_limit.amount;
                 const min = commissionData[this.type][this.userType].min.amount;
-                let cutAmount = this.amount;
-                if (limit) {
-                    cutAmount = getCutAmount({
-                        userId: this.userId, amount: this.amount, date: this.transactionDate, weekData, limit,
-                    });
-                }
+                const cutAmount = limit ? getCutAmount({
+                    userId: this.userId, amount: this.amount, date: this.transactionDate, weekData, limit,
+                }) : this.amount;
                 commission = (cutAmount * commissionData[this.type][this.userType].percents) / 100;
                 return `${this.getRoundedValue(commission < min ? min : commission)}\n`;
             default:
-                return commission;
+                return `${commission}`;
         }
     }
 
