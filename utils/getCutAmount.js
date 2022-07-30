@@ -1,5 +1,3 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-param-reassign */
 const { getWeekNumber } = require('./getWeekNumber');
 
 module.exports.getCutAmount = ({ userId, date, amount, weekData, limit }) => {
