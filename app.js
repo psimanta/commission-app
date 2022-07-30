@@ -1,21 +1,18 @@
-const fs = require('fs');
-const { promisify } = require('util');
 const { createTransaction } = require('./transaction');
+const { readFile } = require('./utils/readFile');
 
-const readFileAsync = promisify(fs.readFile);
-
-const printCommisions = async () => {
+const getCommisions = async (inputs) => {
     const weekData = {};
-    try {
-        const data = await readFileAsync(process.argv[2], 'utf-8');
-        const inputs = JSON.parse(data);
-        inputs.forEach((item) => {
-            const transaction = createTransaction({ transaction: item });
-            process.stdout.write(transaction.getCommision({ weekData }));
-        });
-    } catch (err) {
-        process.stdout.write(err.message);
-    }
+    inputs.forEach((item) => {
+        const transaction = createTransaction({ transaction: item });
+        process.stdout.write(`${transaction.getCommision({ weekData })}\n`);
+    });
 };
 
-printCommisions();
+const generateOutput = async () => {
+    const res = await readFile(process.argv[2]);
+    if (res.err) process.stdout.write(`${res.err}\n`);
+    getCommisions(res.data);
+};
+
+generateOutput();

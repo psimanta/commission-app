@@ -10,6 +10,9 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
+  "plugins": [
+    "jest"
+  ],
   "rules": {
     "linebreak-style": "off",
     "indent": "off",
